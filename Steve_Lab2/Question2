@@ -1,0 +1,36 @@
+#include <stdio.h>
+#define SWAP(t,x,y) { t _z; \
+_z = x; \
+x = y; \
+y = _z; }
+#define XORSWAP(t,x,y) ((&(x) == &(y)) ? (x) : ((x)^=(y),(y)^=(x),(x)^=(y)))
+
+/*Both swaps dont run at the same time. Change XORSWAP to SWAP and then comment out the first SWAP function to test
+them independently*/
+
+
+int main(void)
+{
+	int a = 6, b = 3;
+	char c = 99; /* 'c' */
+	float f = 42.0f;
+	long int l = 25;
+
+	printf("int and int: types match\n");
+	printf("Before SWAP\n a = %i b = %i\n", a, b);
+	SWAP(int, a, b);
+
+	printf("After  Swap\n a = %i b = %i\n", a, b);
+
+	printf("\nchar and float: types don't match\n");
+	printf("Before SWAP\n a = %c b = %2f\n", c, f);
+	SWAP(int, a, b);
+	printf("After  Swap\n a = %c b = %2f\n", c, f);
+
+	printf("\nlong and int: types don't match, but implicit conversion takes place\n"); 
+	printf("Before SWAP\n a = %i b = %li\n", a, l);
+	SWAP(int, a, b);
+	printf("After Swap\n a = %i b = %li\n", a, l);
+
+	return 0;
+}

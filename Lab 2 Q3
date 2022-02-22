@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct{
+  char name[20];
+  char town[20];
+
+} Person;
+void readPerson(Person*p){
+  printf("\nEnter name: ");
+  scanf("%[^\n]%*c", &p->name);
+  printf("Enter town or city: ");
+  scanf("%[^\n]%*c", &p->town);
+}
+
+Person * searchTown(Person * p, Person * sp){
+  int i;
+  for(i=0; i<3; i++){
+    if(strcmp(sp->name, p[i].name) ==0){
+      return &p[i];
+    }
+  }
+  return NULL;
+}
+
+int main(void) 
+{
+  Person persons[3], sp;
+
+  readPerson(&persons[0]);
+  readPerson(&persons[1]);
+  readPerson(&persons[2]);
+
+  printf("\nEnter the name of the person you want to search for: ");
+  scanf("%[^\n]%*c", &sp.name);
+
+  Person * result = searchTown(persons, &sp);
+
+  if(result == NULL){
+    printf("\nNo match found.");
+  }else{
+    printf("\nThis person lives in %s\n", result->town);
+  }
+
+  return 0;
+
+}

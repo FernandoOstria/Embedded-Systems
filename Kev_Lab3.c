@@ -10,7 +10,7 @@ void main(void)
     P2->SEL1 &= ~0x07;
     P2->SEL0 &= ~0x07;
 
-    P2->DIR |= 0x07;           /* P2.2-2.0 set as output */
+    P2->DIR |= 0x07;
 
     int counter = 0;
     int j = 0;

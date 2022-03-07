@@ -29,8 +29,8 @@ void main(void)
     {
         __delay_cycles(sec); //Delay to Keep the light off, otherwise it will turn off really quick and keep the red light forever
         P2->OUT = 0x01;
-        printf("%s \n", "Flash");
         __delay_cycles(2*sec);
+        printf("%s \n", "Flash");
         P2->OUT = 0x00;
 
      }

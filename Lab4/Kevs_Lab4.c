@@ -65,27 +65,29 @@ void main(void)
             int Switch1_Pressed = !(P1->IN & 0x02);
             int Switch2_Pressed = !(P1->IN & 0x10);
 
-            _delay_cycles(sec/10); // Enough to prevent debounce
+            _delay_cycles(sec/20); // Enough to prevent debounce
             if (Switch1_Pressed && Switch2_Pressed)
             {
-                printf("Switch 1 and Switch 2 Press %s \n");
-                uart_println("Switch 1 and Switch 2 Press %s \n");
+                printf("Switch 1 and Switch 2 Press %d %d\n",P1->IN, P2->IN);
+                uart_println("Switch 1 and Switch 2 Press %d %d\n",P1->IN, P2->IN);
                  P2->OUT |= 0x07;
             }
             else if(Switch1_Pressed)
             {
-                printf("Switch 1 Press %s \n");
-                uart_println("Switch 1 Press %s \n");
+                printf("Switch 1 Press %d \n", P1->IN);
+                uart_println("Switch 1 Press %d \n", P1->IN);
                  P2->OUT |= 0x04;
             }
             else if(Switch2_Pressed)
             {
-                printf("Switch 2 Press %s \n");
-                uart_println("Switch 2 Press %s \n");
+                printf("Switch 2 Press %d \n", P2->IN);
+                uart_println("Switch 2 Press %d \n", P2->IN);
                 P2->OUT |= 0x01;
             }
             else
             {
+                printf("Switches are off %d %d\n",P1->IN, P2->IN);
+                uart_println("Switches are off %d %d\n",P1->IN, P2->IN);
                  P2->OUT &= 0x00;
             }
 

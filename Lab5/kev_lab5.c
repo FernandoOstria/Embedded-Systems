@@ -61,7 +61,7 @@ void main(void)
         /* Enable UART module */
         MAP_UART_enableModule(EUSCI_A0_BASE);
 
-        //Setting GPIO's
+        //Setting up the Buttons as inputs and outputs
         GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, 0x012);
         GPIO_setAsOutputPin(GPIO_PORT_P2,0x07);
 

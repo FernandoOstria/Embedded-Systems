@@ -7,10 +7,10 @@
 #include <stdarg.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
-
-#define RS 1     /* P4.0 mask */
-#define RW 2     /* P4.1 mask */
-#define EN 4     /* P4.2 mask */
+//LCD Pins with H/L
+#define RS 1     // PORT .PIN 0
+#define RW 2     // PORT. PIN 1
+#define EN 4     // PORT. PIN 2
 #define size 3
 
 void delayMs(int n);
@@ -47,8 +47,10 @@ void LCD_init(void) {
 void LCD_nibble_write(unsigned char data, unsigned char control) {
     data &= 0xF0;           /* clear lower nibble for control */
     control &= 0x0F;        /* clear upper nibble for data */
+    //Set RS, and RW to 00 for instruction input and to read it
     GPIO_setOutputHighOnPin(GPIO_PORT_P4,data | control | EN);
     delayMs(0);
+    //I guess to refresh the display??
     P4->OUT = data;                 /* clear E */
     P4->OUT = 0;
 }

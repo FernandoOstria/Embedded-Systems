@@ -24,7 +24,7 @@ void LCD_cursorDown();
 void LCD_display(char *str);
 
 void LCD_init(void) {
-    P4->DIR = 0xFF;     /* make P4 pins output for data and controls */
+    GPIO_setAsOutputPin(GPIO_PORT_P4, 0xFF);/* make P4 pins output for data and controls */
     delayMs(30);                /* initialization sequence */
     LCD_nibble_write(0x30, 0);
     delayMs(10);
@@ -47,7 +47,7 @@ void LCD_init(void) {
 void LCD_nibble_write(unsigned char data, unsigned char control) {
     data &= 0xF0;           /* clear lower nibble for control */
     control &= 0x0F;        /* clear upper nibble for data */
-    P4->OUT = data | control | EN;  /* pulse E */
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4,data | control | EN);
     delayMs(0);
     P4->OUT = data;                 /* clear E */
     P4->OUT = 0;
